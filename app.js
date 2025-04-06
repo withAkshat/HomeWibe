@@ -59,7 +59,7 @@ const store = MongoStore.create({
     touchAfter:24*3600,
     ttl:14 * 24 * 60 * 60, // = 14 days. Default
     crypto: {
-        secret:"mysupersectetcode",
+        secret:process.env.SECRET,
       }
 });
 
@@ -69,7 +69,7 @@ store.on("error", ()=>{ // if there occurs an error on mongo store
 
 let sessionsOptions = {
     store,
-    secret:"mysupersectetcode",
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
