@@ -1,0 +1,144 @@
+<%- layout('./layouts/boilerplate') %>
+
+
+<style>
+    .filters{
+        display:flex;
+    }
+    .filter {
+        text-align: center;
+        font-size:0.9rem;
+        /* margin-right: 1rem; */
+        margin:0 0.8rem 0 0.8rem;
+        opacity: 0.88;
+    }
+    .filter:hover{
+        opacity:1;
+        cursor: pointer;
+    }
+
+    .options{
+        display: flex;
+        margin-left: 0rem;
+        /* padding:0; */
+    }
+
+    .tax-info{
+        display:none;
+        font-size:0.9;
+    }
+
+    .tax_box {
+    border:1.2px solid black;
+    border-radius:20px;
+    height:3.2rem;
+    display:flex;
+    align-items:center ;
+    padding: 0.8rem 3rem 0.8rem 1rem !important;
+    /* padding: auto !important; */
+    width:161.82px;
+
+    }
+   
+    .form-check-label{
+        font-size:0.8em;
+    }
+
+</style>    
+<div class="options">
+<button class="btn d-lg-none mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fa-solid fa-plane-departure"></i>
+  </button>
+
+<div class="collapse d-lg-block" id="collapseExample">
+  
+    <div class="filters row">
+        <div class="filter col-1">
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-bed"></i>
+            <p>Rooms</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-mountain-city"></i>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-mountain"></i>
+            <p>Mountains</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-brands fa-fort-awesome"></i>
+            <p>Castle</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-person-swimming"></i>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-campground"></i>
+            <p>Camping  </p>
+        </div>
+        <div class="filter col-1">
+            <i class="fa-solid fa-cow"></i>
+            <p>Farms</p>
+        </div>
+  </div>
+</div>
+
+<div class="form-check-reverse form-switch d-none d-lg-block tax_box">
+    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+    <label class="form-check-label" for="switchCheckDefault">Taxes after Total</label>
+  </div>
+
+</div>
+    <!-- <body>  -->
+    
+    <!-- <form action="/listings/new" method="GET"><button>Create New Listing</button></form> -->
+
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 row-cols-xs-0">
+        <% for( listing of allListings){ %>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+                
+                    <div class="card listing-card col">
+                        <img src="<%= listing.image.url %>" class="card-img-top listing-card-img-top" style="height:22rem" alt="#listing_image">
+                        <div class="card-img-overlay">abcd</div>
+                    
+                        <div class="card-body listing-card-body">
+                            <h5 class="card-title">
+                                <%= listing.title %>
+                            </h5>
+                            <p class="card-text">&#8377;<%=listing.price.toLocaleString("en-IN")%> night <i class="tax-info">+18% GST</i> 
+                                    <br>
+                                    <%= listing.location %>
+                            </p>
+                        </div>
+                   
+                    </div>  
+                
+                <%}%>
+            </a>
+    </div>
+
+<script>
+
+let taxSwitch = document.getElementById("switchCheckDefault");
+taxSwitch.addEventListener("click",()=>{
+    let tax_info = document.getElementsByClassName("tax-info");
+    for(tax of tax_info){
+        if(tax.style.display != "inline"){
+            tax .style.display = "inline";
+        }
+        else{
+            tax.style.display = "none"; 
+        }
+        
+    }
+})
+
+</script>
+
+    <!-- </body> -->
