@@ -70,9 +70,12 @@
             <hr/>
             <!-- All Reviews -->
              
-             <h2>All Reviews</h2>
-             <br>
+            <%if(listing.reviews.length>0){ %>
+              
+
             <div class="row">
+                <h2>All Reviews</h2>
+             <br> <br>
             <% for(review of listing.reviews){ %>
                  <!-- <li> , <%= review.rating %> stars </li> -->
                   <div class="card col-5 ms-4 mb-4">
@@ -86,8 +89,30 @@
                    </div>
             <% } %>
         </div>
-            
+        <% } %>
+       
+
         </div>
-        
+
+         <!-- Map Integration! -->
+        <div class="col-9 mb-2" >
+            <h3>Where you will be!</h3>
+            <div id='map'></div>
+        </div>    
 </div>
+
+ <script>
+    let mapToken = "<%= process.env.MAP_TOKEN %>"
+        mapboxgl.accessToken = mapToken;
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+            style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
+            center: [11.255, 43.77], // starting position
+            zoom: 13 // starting zoom
+        });
+
+        map.addControl(new mapboxgl.FullscreenControl());
+</script>
+
 </body>

@@ -98,3 +98,9 @@ body{
     height:30vh;
 }
 
+/* Map */
+
+#map{
+    height:300px;
+    width:100%;
+}

@@ -106,7 +106,7 @@ app.get("/demouser", async(req,res)=>{
 
 let port = 8080;
 app.listen(port, () => {
-    console.log("Server is listening");
+    console.log("Server is listening 8080");
 })
 
 //----------------------------------------------------------------------------------------
