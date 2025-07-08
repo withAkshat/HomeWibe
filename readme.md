@@ -1,9 +1,6 @@
-![alt text](./previews/HomePage.png)
-
-![alt text](./previews/SignUp.png)
-
-![alt text](./previews/Login.png)
-
-![alt text](./previews/IndividualLisiting.png)
-
-![alt text](./previews/Review.png)
+![alt text](previews)
+![alt text](previews/HomePage.png)
+![alt text](previews/SignUp.png)
+![alt text](previews/Login.png)
+![alt text](previews/IndividualLisiting.png)
+![alt text](previews/Review.png)
