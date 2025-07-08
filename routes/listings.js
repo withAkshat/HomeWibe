@@ -23,7 +23,7 @@ router.get("/new", isLoggedIn, listingsControllers.renderNewForm);
 router.get("/:id",listingsControllers.showListing);
 
 // Create Route..
-router.post("/", isLoggedIn, upload.single('list[image]'), validateListing,wrapAsync(listingsControllers.createlisting));
+router.post("/", isLoggedIn, validateListing,wrapAsync(listingsControllers.createlisting));
 
 // Edit Route
 router.get("/:id/edit", isLoggedIn, isOwner, listingsControllers.renderEditForm);

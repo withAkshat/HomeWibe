@@ -1,4 +1,7 @@
 const Listing = require("../models/listings");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
     let allListings = await Listing.find();
@@ -12,13 +15,24 @@ module.exports.renderNewForm = async (req, res)=>{
 }
  
 module.exports.createlisting = async (req,res,next)=>{
+
+   let response = await geocodingClient.forwardGeocode({
+   query: req.body.location,
+   limit: 1
+    })
+  .send()
+  console.log(response.body.features[0].geometry);
+
+  
     let { path:url, filename:filename } = req.file;
     console.log(url,"..",filename);
 
     let listing = req.body.list; // Sari input values ko list object se listing variable mai copy kiya..!!
     listing.owner = req.user._id;
     listing.image = { url,filename };
+
     const newList = new Listing(listing); // newlist database mai insert ho rahi hai...!!
+    newList.geometry = response.body.features[0].geometry; // Saving geometry coordinates!
     await newList.save();    
     req.flash("success","Listing Added!");
     res.redirect("/listings");
